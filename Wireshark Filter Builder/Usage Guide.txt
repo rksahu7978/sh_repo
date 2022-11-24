@@ -1,0 +1,31 @@
+##### Usage Guide #####
+
+Highlight :-
+---------
+1. Cross platform usage.
+2. Space & time complexity minimum.(<1 sec.)
+
+Pre-requisites :-
+--------------
+1. Python 3.10 or later.
+2. "openpyxl" module needs to be installed.
+	Follow installation commands below for respective operating system :
+		- Windows [pip install openpyxl]
+		- Linux [pip3 install -U openpyxl --user]
+		- MacOS [pip3 install -U openpyxl --user]
+
+Important notes :-
+---------------
+1. Keep all files in same folder.
+2. Don't change the Excel file name.
+
+How to use ?
+----------
+1. Open a "Command line" or "Powershell" or "Terminal" or "Shell" and navigate to the folder
+   where all the ".py" and the Excel file is kept.
+
+1. Run any one of the 3 ".py" files with below command.
+	Follow below run commands for respective operating system.
+		- Windows [python <filename>.py]
+		- Linux [python3 <filename>.py]
+		- MacOS [python3 <filename>.py]
