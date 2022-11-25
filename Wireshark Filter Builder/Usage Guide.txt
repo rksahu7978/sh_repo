@@ -7,7 +7,7 @@ Highlight :-
 
 Pre-requisites :-
 --------------
-1. Python 3.10 or later.
+1. Python 3.10.7/8.
 2. "openpyxl" module needs to be installed.
 	Follow installation commands below for respective operating system :
 		- Windows [pip install openpyxl]
