@@ -1,6 +1,3 @@
-# Getting MSISDN
-
-
 def get_msisdn(row):
     from openpyxl import load_workbook
     wb = load_workbook('./Sub_Details.xlsx')
@@ -9,18 +6,12 @@ def get_msisdn(row):
     return value
 
 
-# Getting IMSI
-
-
 def get_imsi(row):
     from openpyxl import load_workbook
     wb = load_workbook('./Sub_Details.xlsx')
     ws = wb.active
     value = ws[f'B{row}'].value
     return value
-
-
-# Getting all MSISDN & IMSI
 
 
 def get_list(num_of_cycle):
@@ -130,8 +121,6 @@ def e212(imsi_list):
 
     return e212_final[0:len(e212_final) - 4:]
 
-
-# Making Filter
 
 net_list = list(get_list(int(input("Enter the total number of subscribers :- "))))
 
