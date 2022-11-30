@@ -119,7 +119,7 @@ def e212(imsi_list):  # E.212 Format
 def http_imsi(imsi_list):  # HTTP Protocol
     http_imsi_final = ""
     for imsi in imsi_list:
-        http_imsi_final = f'http.authorization contains {imsi} or ' + http_imsi_final
+        http_imsi_final = f'http.authorization contains {imsi} or http.response_for.uri contains {imsi} or ' + http_imsi_final
     return http_imsi_final[0:len(http_imsi_final) - 4:]
 
 
