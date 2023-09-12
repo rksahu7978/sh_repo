@@ -148,4 +148,4 @@ net_list = list(get_list(master_obj.net_sub))
 
 final_filter = f'\n{sip_ctn(net_list[0])} or {diameter_ctn(net_list[0])} or {isup_calling(net_list[0])} or {isup_called(net_list[0])} or {e164(net_list[0])} or {enum(net_list[0])} or {http_ctn(net_list[0])} or {radius_ctn(net_list[0])} or {sip_imsi(net_list[1])} or {diameter_imsi(net_list[1])} or {e212(net_list[1])} or {http_imsi(net_list[1])} or {radius_imsi(net_list[1])}'
 
-print(f'{final_filter}\n')
+print(f'{final_filter}')
