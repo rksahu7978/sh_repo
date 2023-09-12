@@ -1,13 +1,13 @@
 def get_msisdn(row):  # Getting MSISDN
     from openpyxl import load_workbook
-    wb = load_workbook('.\\Sub_Details.xlsx')
+    wb = load_workbook("Sub_Details.xlsx")
     ws = wb.active
     return ws[f'A{row}'].value
 
 
 def get_imsi(row):  # Getting IMSI
     from openpyxl import load_workbook
-    wb = load_workbook('.\\Sub_Details.xlsx')
+    wb = load_workbook("Sub_Details.xlsx")
     ws = wb.active
     return ws[f'B{row}'].value
 
@@ -44,14 +44,14 @@ def get_list(num_of_cycle):  # Getting list of subscribers
 def sip_ctn(ctn_list):  # SIP Protocol
     sip_ctn_final = ""
     for ctn in ctn_list:
-        sip_ctn_final = f'sip contains 44{ctn} or ' + sip_ctn_final
+        sip_ctn_final = f'sip contains 44{ctn} or sip.to.user contains {ctn} or sip.from.user contains {ctn} or ' + sip_ctn_final
     return sip_ctn_final[0:len(sip_ctn_final) - 4:]
 
 
 def diameter_ctn(ctn_list):  # DIAMETER Protocol
     diameter_ctn_final = ""
     for ctn in ctn_list:
-        diameter_ctn_final = f'diameter contains 44{ctn} or ' + diameter_ctn_final
+        diameter_ctn_final = f'diameter contains 44{ctn} or diameter.User-Name contains {ctn} or diameter.Public-Identity contains {ctn} or ' + diameter_ctn_final
     return diameter_ctn_final[0:len(diameter_ctn_final) - 4:]
 
 
@@ -92,20 +92,27 @@ def http_ctn(ctn_list):  # HTTP protocol
         http_ctn_final = f'http.request.uri contains 44{ctn} or http.response_for.uri contains 44{ctn} or xml.cdata contains 44{ctn} or ' + http_ctn_final
     return http_ctn_final[0:len(http_ctn_final) - 4:]
 
+
+def radius_ctn(ctn_list):  # RADIUS Protocol
+    radius_ctn_final = ""
+    for ctn in ctn_list:
+        radius_ctn_final = f'radius.User_Name contains {ctn} or ' + radius_ctn_final
+    return radius_ctn_final[0:len(radius_ctn_final) - 4:]
+
 # Building filters with IMSI
 
 
 def sip_imsi(imsi_list):  # SIP Protocol
     sip_imsi_final = ""
     for imsi in imsi_list:
-        sip_imsi_final = f'sip contains {imsi} or ' + sip_imsi_final
+        sip_imsi_final = f'sip contains {imsi} or sip.to.user contains {imsi} or sip.from.user contains {imsi} or ' + sip_imsi_final
     return sip_imsi_final[0:len(sip_imsi_final) - 4:]
 
 
 def diameter_imsi(imsi_list):  # DIAMETER Protocol
     diameter_imsi_final = ""
     for imsi in imsi_list:
-        diameter_imsi_final = f'diameter contains {imsi} or ' + diameter_imsi_final
+        diameter_imsi_final = f'diameter contains {imsi} or diameter.User-Name contains {imsi} or diameter.Public-Identity contains {imsi} or ' + diameter_imsi_final
     return diameter_imsi_final[0:len(diameter_imsi_final) - 4:]
 
 
@@ -123,6 +130,13 @@ def http_imsi(imsi_list):  # HTTP Protocol
     return http_imsi_final[0:len(http_imsi_final) - 4:]
 
 
+def radius_imsi(imsi_list):  # RADIUS Protocol
+    radius_imsi_final = ""
+    for imsi in imsi_list:
+        radius_imsi_final = f'radius.User_Name contains {imsi} or ' + radius_imsi_final
+    return radius_imsi_final[0:len(radius_imsi_final) - 4:]
+
+
 class Master:  # Master class
     def __init__(self, net_sub):
         self.net_sub = net_sub
@@ -132,4 +146,6 @@ master_obj = Master(int(input("Enter the total number of subscribers :- ")))
 
 net_list = list(get_list(master_obj.net_sub))
 
-print(f'{sip_ctn(net_list[0])} or {diameter_ctn(net_list[0])} or {isup_calling(net_list[0])} or {isup_called(net_list[0])} or {e164(net_list[0])} or {enum(net_list[0])} or {http_ctn(net_list[0])} or {sip_imsi(net_list[1])} or {diameter_imsi(net_list[1])} or {e212(net_list[1])} or {http_imsi(net_list[1])}')
+final_filter = f'\n{sip_ctn(net_list[0])} or {diameter_ctn(net_list[0])} or {isup_calling(net_list[0])} or {isup_called(net_list[0])} or {e164(net_list[0])} or {enum(net_list[0])} or {http_ctn(net_list[0])} or {radius_ctn(net_list[0])} or {sip_imsi(net_list[1])} or {diameter_imsi(net_list[1])} or {e212(net_list[1])} or {http_imsi(net_list[1])} or {radius_imsi(net_list[1])}'
+
+print(f'{final_filter}\n')
